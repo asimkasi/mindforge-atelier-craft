@@ -66,25 +66,49 @@ serve(async (req) => {
 
     let data: any = null;
     let parseError = null;
+    let responseText = "";
 
+    // Try to parse as JSON, otherwise fallback and include text for debug.
     try {
-      data = await resp.json();
+      if (resp.headers.get("content-type")?.includes("application/json")) {
+        data = await resp.json();
+      } else {
+        responseText = await resp.text();
+        parseError = "Provider returned non-JSON: " + responseText.slice(0, 256); // log up to 256 chars
+      }
     } catch (e) {
-      parseError = e;
+      parseError = String(e);
+      try {
+        responseText = await resp.text(); // capture whatever was received
+      } catch {}
     }
 
     if (!resp.ok) {
       // Try to extract API error message if available
-      const errorMsg = data?.error?.message || data?.error || (parseError ? "Invalid response from LLM provider" : "Failed to get LLM result");
+      const errorMsg =
+        data?.error?.message ||
+        data?.error ||
+        (parseError ? `Invalid or non-JSON response from LLM provider: ${parseError}` : "Failed to get LLM result");
       return new Response(JSON.stringify({ error: errorMsg }), { status: 500, headers: corsHeaders });
     }
 
+    // Handle empty or malformed provider responses
     if (!data || !data.choices || !data.choices[0]?.message?.content) {
-      return new Response(JSON.stringify({ error: "LLM provider returned no content." }), { status: 500, headers: corsHeaders });
+      // If we got fallback text, surface a useful error
+      let errMsg = "LLM provider returned no content.";
+      if (parseError) {
+        errMsg += ` (ParseError: ${parseError})`;
+      } else if (responseText) {
+        errMsg += ` (Text: ${responseText.slice(0, 256)})`;
+      }
+      return new Response(JSON.stringify({ error: errMsg }), { status: 500, headers: corsHeaders });
     }
 
     const content = data.choices[0].message.content;
-    return new Response(JSON.stringify({ content }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return new Response(
+      JSON.stringify({ content }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   } catch (err) {
     return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders });
   }
