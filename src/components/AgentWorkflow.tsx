@@ -38,6 +38,7 @@ const exampleOutputs: Record<string, Output> = {
 const LLM_OPTIONS = [
   { key: "openai", label: "OpenAI" },
   { key: "lmstudio", label: "LM Studio" },
+  { key: "openrouter", label: "OpenRouter" },
 ];
 
 const SYSTEM_PROMPTS: Record<string, string> = {

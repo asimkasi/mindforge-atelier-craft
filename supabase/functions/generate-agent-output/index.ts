@@ -7,8 +7,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Use secrets for OpenAI key; LM Studio runs locally and doesn't require a key; provide base URL for LM Studio if needed
+// Use secrets for API keys
 const openAiKey = Deno.env.get("OPENAI_API_KEY");
+const openRouterKey = Deno.env.get("OPENROUTER_API_KEY");
 const lmStudioBase = Deno.env.get("LM_STUDIO_BASE_URL") || "http://localhost:1234"; // default LM Studio address
 
 serve(async (req) => {
@@ -29,7 +30,7 @@ serve(async (req) => {
         "Content-Type": "application/json"
       };
       body = {
-        model: "gpt-4o", // you can set this to any OpenAI model you wish
+        model: "gpt-4o",
         messages: [
           ...(system ? [{ role: "system", content: system }] : []),
           { role: "user", content: prompt }
@@ -39,7 +40,20 @@ serve(async (req) => {
       apiUrl = `${lmStudioBase}/v1/chat/completions`;
       headers = { "Content-Type": "application/json" };
       body = {
-        model: "TheBloke/Mixtral-8x7B-Instruct-v0.1-GPTQ", // Update to your preferred LM Studio model
+        model: "TheBloke/Mixtral-8x7B-Instruct-v0.1-GPTQ",
+        messages: [
+          ...(system ? [{ role: "system", content: system }] : []),
+          { role: "user", content: prompt }
+        ],
+      };
+    } else if (llm === "openrouter") {
+      apiUrl = "https://openrouter.ai/api/v1/chat/completions";
+      headers = {
+        Authorization: `Bearer ${openRouterKey}`,
+        "Content-Type": "application/json"
+      };
+      body = {
+        model: "openai/gpt-3.5-turbo", // default OpenRouter model (can be changed!)
         messages: [
           ...(system ? [{ role: "system", content: system }] : []),
           { role: "user", content: prompt }
