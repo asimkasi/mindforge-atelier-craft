@@ -53,7 +53,7 @@ serve(async (req) => {
         "Content-Type": "application/json"
       };
       body = {
-        model: "openai/gpt-3.5-turbo", // default OpenRouter model (can be changed!)
+        model: "deepseek/deepseek-chat-v3-0324:free",
         messages: [
           ...(system ? [{ role: "system", content: system }] : []),
           { role: "user", content: prompt }
@@ -75,3 +75,4 @@ serve(async (req) => {
     return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders });
   }
 });
+
