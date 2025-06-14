@@ -9,6 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      agent_outputs: {
+        Row: {
+          agent_name: string
+          app_idea_id: string | null
+          content: string
+          created_at: string
+          id: string
+          phase: string
+        }
+        Insert: {
+          agent_name: string
+          app_idea_id?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          phase: string
+        }
+        Update: {
+          agent_name?: string
+          app_idea_id?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          phase?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_outputs_app_idea_id_fkey"
+            columns: ["app_idea_id"]
+            isOneToOne: false
+            referencedRelation: "app_ideas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      app_ideas: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      project_logs: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          log_level: string
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          log_level?: string
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          log_level?: string
+        }
+        Relationships: []
+      }
       test_lovable: {
         Row: {
           created_at: string
