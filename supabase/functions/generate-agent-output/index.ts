@@ -7,7 +7,6 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Use secrets for API keys
 const openAiKey = Deno.env.get("OPENAI_API_KEY");
 const openRouterKey = Deno.env.get("OPENROUTER_API_KEY");
 const lmStudioBase = Deno.env.get("LM_STUDIO_BASE_URL") || "http://localhost:1234"; // default LM Studio address
@@ -64,15 +63,29 @@ serve(async (req) => {
     }
 
     const resp = await fetch(apiUrl, { method: "POST", headers, body: JSON.stringify(body) });
-    const data = await resp.json();
-    if (!resp.ok) {
-      return new Response(JSON.stringify({ error: data.error || "Failed to get LLM result" }), { status: 500, headers: corsHeaders });
+
+    let data: any = null;
+    let parseError = null;
+
+    try {
+      data = await resp.json();
+    } catch (e) {
+      parseError = e;
     }
 
-    const content = data?.choices?.[0]?.message?.content ?? "(No output)";
+    if (!resp.ok) {
+      // Try to extract API error message if available
+      const errorMsg = data?.error?.message || data?.error || (parseError ? "Invalid response from LLM provider" : "Failed to get LLM result");
+      return new Response(JSON.stringify({ error: errorMsg }), { status: 500, headers: corsHeaders });
+    }
+
+    if (!data || !data.choices || !data.choices[0]?.message?.content) {
+      return new Response(JSON.stringify({ error: "LLM provider returned no content." }), { status: 500, headers: corsHeaders });
+    }
+
+    const content = data.choices[0].message.content;
     return new Response(JSON.stringify({ content }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders });
   }
 });
-
