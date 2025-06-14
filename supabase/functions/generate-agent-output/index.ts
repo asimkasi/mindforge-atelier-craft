@@ -64,52 +64,59 @@ serve(async (req) => {
 
     const resp = await fetch(apiUrl, { method: "POST", headers, body: JSON.stringify(body) });
 
+    // Always first read response as text, then try to parse as JSON
+    let responseText = await resp.text();
     let data: any = null;
-    let parseError = null;
-    let responseText = "";
-
-    // Try to parse as JSON, otherwise fallback and include text for debug.
+    let parseError: string | null = null;
     try {
-      if (resp.headers.get("content-type")?.includes("application/json")) {
-        data = await resp.json();
-      } else {
-        responseText = await resp.text();
-        parseError = "Provider returned non-JSON: " + responseText.slice(0, 256); // log up to 256 chars
+      // Only try JSON parse if text looks like JSON (avoid blank string errors)
+      if (responseText.trim().startsWith("{") || responseText.trim().startsWith("[")) {
+        data = JSON.parse(responseText);
       }
     } catch (e) {
       parseError = String(e);
-      try {
-        responseText = await resp.text(); // capture whatever was received
-      } catch {}
     }
 
+    // Validation: always return well-formed error JSON if not ok or empty/invalid
     if (!resp.ok) {
-      // Try to extract API error message if available
-      const errorMsg =
-        data?.error?.message ||
-        data?.error ||
-        (parseError ? `Invalid or non-JSON response from LLM provider: ${parseError}` : "Failed to get LLM result");
-      return new Response(JSON.stringify({ error: errorMsg }), { status: 500, headers: corsHeaders });
+      // Log errors with text for diagnostics
+      const errorMsg = (data?.error?.message || data?.error || `Upstream error (${resp.status}): ${parseError ? parseError : ''}`) as string;
+      return new Response(
+        JSON.stringify({
+          error: errorMsg,
+          status: resp.status,
+          responseText: responseText.slice(0, 512),
+          parseError,
+        }),
+        { status: 500, headers: corsHeaders }
+      );
     }
 
-    // Handle empty or malformed provider responses
+    // No usable data or output from provider
     if (!data || !data.choices || !data.choices[0]?.message?.content) {
-      // If we got fallback text, surface a useful error
-      let errMsg = "LLM provider returned no content.";
-      if (parseError) {
-        errMsg += ` (ParseError: ${parseError})`;
-      } else if (responseText) {
-        errMsg += ` (Text: ${responseText.slice(0, 256)})`;
-      }
-      return new Response(JSON.stringify({ error: errMsg }), { status: 500, headers: corsHeaders });
+      let errMsg = "LLM provider returned no content or wrong output format.";
+      return new Response(
+        JSON.stringify({
+          error: errMsg,
+          status: resp.status,
+          responseText: responseText.slice(0, 512),
+          parseError
+        }),
+        { status: 500, headers: corsHeaders }
+      );
     }
 
+    // Success case: return content as expected
     const content = data.choices[0].message.content;
     return new Response(
       JSON.stringify({ content }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: corsHeaders });
+    // Always return error as JSON, never as empty response
+    return new Response(
+      JSON.stringify({ error: String(err) }),
+      { status: 500, headers: corsHeaders }
+    );
   }
 });
