@@ -54,7 +54,11 @@ Write `VENTURE/research/<slug>.md`:
 - **Distribution**: how the first 10 buyers actually find it (marketplace SEO terms,
   specific communities where sharing is welcome, content angle) — "post it and hope" is not a plan
 - **Evidence**: links/facts found; mark anything unverified
-- **Next step**: the single next action (usually `/product-factory` or `/gig-machine`)
+- **Next step**: the single next action. For a service spec: `/gig-machine`. For a
+  product spec: `/product-factory` ONLY if the Track B entry condition holds (the same
+  request paid for or asked about 3+ times in service work, or Track A reliably at
+  $200/mo — see `VENTURE/PLAYBOOK.md`); otherwise the next step is the service that
+  tests the same demand, or parking the spec until the condition is met
 ```
 
 ## Rules

@@ -13,6 +13,11 @@ they got more than they paid for?** If the honest answer is "it's fine", keep wo
 
 - An offer spec from `VENTURE/research/<slug>.md` (run `/market-scout` first if none exists —
   do not build products that haven't passed a demand check).
+- **The Track B entry condition** (`VENTURE/PLAYBOOK.md`): confirm the demand proof —
+  the same request paid for or asked about 3+ times in service work, or Track A
+  reliably clearing $200/mo trailing. If it's absent, say so, recommend `/gig-machine`
+  (the service that tests the same demand), and stop; the operator can override
+  knowingly, but the sequencing rule is the strategy, not a suggestion.
 - The operator's niche knowledge. If the spec's moat depends on judgment or domain insight,
   interview the user for it before building. Their answers are the ingredient that separates
   this from AI slop; do not fabricate expertise they didn't give you.

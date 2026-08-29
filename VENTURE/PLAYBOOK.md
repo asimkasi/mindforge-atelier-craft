@@ -1,9 +1,11 @@
 # The Playbook
 
-Three income tracks, ranked by speed-to-first-dollar. The math below is net of platform
-fees, assumes a solo newcomer with no audience and 3–6 hrs/week, and was researched
-against current platform terms in August 2026 (see Appendix — re-verify fees before
-relying on them; platforms change).
+Three income tracks, ranked by speed-to-first-dollar. **"Net" throughout this system
+means after platform fees and refunds, before taxes** — the same definition the ledger
+and scoreboard use; the tax set-aside is handled separately. The math assumes a solo
+newcomer with no audience and 3–6 hrs/week, and was researched against current platform
+terms in August 2026 (see Appendix — re-verify fees before relying on them; platforms
+change).
 
 **Recommended sequence — one offer, one channel, 90 days.** Track A (services) is the
 opening move: it's the only reliably fast path for a no-audience newcomer, and it
@@ -11,9 +13,10 @@ generates the demand evidence the other tracks need. Add Track B (products) only
 service request has been paid for or asked about 3+ times — that's demand proof, and
 products built from it dramatically beat the sell-zero base rate. Add Track C
 (compounding) once revenue exists. Running two sales channels before the first one works
-simply halves both. The one cheap exception: a low-effort build-in-public log of your
-service work costs ~30 min/week and pre-seeds Track C's audience without being a second
-channel.
+simply halves both. Two cheap exceptions that don't count as second channels: a
+low-effort build-in-public log of your service work (~30 min/week, pre-seeds Track C's
+audience), and a passive listing that needs no ongoing effort once published (e.g. a
+Fiverr gig sitting there while Upwork gets the active cadence).
 
 **The week-4 diagnostic** (from the failure-mode analysis, and it applies to this very
 repo): at the end of week 4, count conversations with humans who could pay you. If the
@@ -23,7 +26,7 @@ pipelines feels like progress and produces $0 — and free Claude labor makes th
 
 ---
 
-## Track A — Productized services (fastest: first dollar in weeks 3–8)
+## Track A — Productized services (fastest: first dollar realistically in weeks 4–10)
 
 **The offer**: ONE fixed-scope, fixed-price package where Claude Code does 80–90% of
 production and you do intake, QA, and the client relationship. Pick one of these three
@@ -47,27 +50,51 @@ announcement once. No cold outreach, ever — it burns the only assets you have 
 your accounts, your domain).
 
 **The math to $200/mo**: ~$125 average net per job → **2 jobs/month**. First contract
-typically lands after 15–30 tailored proposals ($30–70 total in Connects). Ramp:
+typically lands after 15–30 tailored proposals. Ramp — the column says *if the ramp
+holds*, not "expected"; per the honest-expectations quote below, weeks 1–6 are roughly
+$0 and $200/mo is a realistic shot by months 3–5, not a schedule:
 
-| Phase | Timeline | Hours/wk | Expected net/mo |
+| Phase | Timeline | Hours/wk | Net revenue/mo if the ramp holds |
 |---|---|---|---|
 | Setup + 3 portfolio artifacts (before/after cleanup case study; docs package on your own repo; fix case study on this repo) | Weeks 1–2 | 6 | $0 |
-| Proposal cadence 8–12/wk, intro pricing $50–120 to buy reviews | Weeks 2–6 | 5 | $30–200 |
-| 3–5 reviews in; raise to $125–250/job, 2–4 jobs/mo | Months 2–3 | 4 | **$200–500** |
-| Retainer conversion (data-hygiene $150–300/mo, on-platform) | Months 3–6 | 4 | $500–1,000 |
-| 2–3 retainers + 4–6 one-offs | Months 6–9 | 6 | $1,000–2,000 |
+| Proposal cadence 8–12/wk, intro pricing $50–120 to earn early reviews faster | Weeks 2–8 | 5 | $0 most weeks; the first $50–300 lands somewhere in weeks 4–10 |
+| 3–5 reviews in; raise to $125–250/job, 2–4 jobs/mo | Months 3–5 | 4 | **$200–500** |
+| Retainer conversion (data-hygiene $150–300/mo, on-platform) | Months 4–7 | 4 | $500–1,000 |
+| 2–3 retainers + 4–6 one-offs | Months 7–10 | 6 | $1,000–2,000 (conditional on every earlier phase converting) |
+
+**The honest failure rate**: there's no reliable published number for what fraction of
+newcomers never escape the cold start, but it is a real fraction, not an edge case —
+"most new freelancer profiles die in the cold-start" is the base rate this track must
+beat. The tripwire: 20+ tailored proposals with zero replies and zero profile views
+means the *offer* needs redesigning (see `/weekly-review`'s kill rules); zero replies at
+proposal 10 is still normal variance. Keeping the cadence through silence is the whole
+game.
+
+**Cash costs**: Connects are recurring, not one-off — at full cadence (8–12 proposals/wk
+at ~$1.20–2.40 each) budget **~$40–115/month**, which can make the pre-first-contract
+weeks cash-negative. That is the entire cash risk of the track; treat it as the price of
+admission and log it in the ledger.
 
 **The weekly quota floor** (designed for your demotivated week-5 self, which is when
 these plans actually die): 5 tailored proposals OR 3 substantive community contributions,
-agent-prepped so it costs ≤90 human minutes. Track the quota, not revenue — revenue is a
-lagging indicator and the weeks 3–8 feedback desert is the point of maximum quit-risk.
+agent-prepped so it costs ≤90 human minutes — a community contribution counts only if
+the community permits AI-assisted content, you substantially rewrote and own every word,
+and it would be worth posting with zero promotional payoff. Track the quota, not
+revenue — revenue is a lagging indicator and the weeks 3–8 feedback desert is the point
+of maximum quit-risk.
 
 **What kills it**: stopping proposal cadence in the cold-start; scope creep (fixed written
 scope + paid change orders); >24h message response times; one bad early review (over-deliver
 on the first five jobs); denying AI use when asked (never do this — position as
 "automation-assisted with human QA," which is also the selling point).
 
-**Hygiene**: delete client data after delivery and say so in the gig description; leave
+**Hygiene**: before processing any client data or code with AI tooling, confirm the
+job terms and contract permit third-party tool use (the up-front process disclosure in
+your proposal is what makes acceptance informed), minimize what enters a session, and
+treat regulated data (health, financial, EU personal data) as needing explicit written
+authorization; client files live only in the git-ignored `VENTURE/clients/` and are
+purged after the revision window (the `gig-machine` skill enforces both, which is what
+makes the gig description's deletion promise true); leave
 Upwork's AI-data-training provisions off for client work; honor non-circumvention
 (~24 months); set aside 25–30% of net for self-employment tax.
 
@@ -105,12 +132,16 @@ marketplace Discover traffic (30% fee) as a bonus, never the plan.
 | Product #1 from proven demand, tested, launched at $19 intro + free lite repo + one honest launch post | Weeks 1–2 of track | 5 | $0–25 |
 | Ship next products every 1–2 weeks while signals accumulate | Months 1–2 | 5 | $30–90 |
 | Double down on traction: v2, $49–79 pro tier, bundles | Months 3–4 | 4 | $100–200 |
-| Winner-led product line, price increases, compounding funnels | Months 5–6 | 4 | **$200–350** |
+| Winner-led product line, price increases, compounding funnels | Months 5–6 | 4 | **$200–350** if a winner emerged; well under $100 otherwise (~30–40% chance) |
 | Affiliates, tutorial content, second line | Months 7–12 | 4 | $400–1,200 (if a winner emerged; $150–300 if not) |
 
-**Reality check on net**: refunds run 1–5% (Gumroad keeps its fees on refunds),
-chargebacks cost $15–25 each, support email is real labor, and the tax set-aside is
-25–30%. To durably *net* $200/mo, plan for roughly $300–350/mo gross.
+**Reality check on take-home**: refunds run 1–5% (Gumroad keeps its fees on refunds),
+chargebacks cost $15–25 each, and support email is real labor. To clear $200/mo after
+fees, refunds, AND the 25–30% tax set-aside — i.e. actual take-home, a stricter bar than
+this playbook's "net" — plan for roughly $300–350/mo gross. (The Claude subscription is
+likely a deductible business expense once this is a real business — confirm with a tax
+professional — which is what makes "$200 net revenue covers the $200 cost"
+approximately true.)
 
 **What kills it**: generic templates a buyer could prompt for themselves (the moat must be
 *tested judgment* — working configs, hard-won checklists, niche data); drafted-but-unlaunched
@@ -130,7 +161,8 @@ only time. That risk profile is why this is the second gear, not the first.
 
 1. **An open-source dev tool** (a Claude Code skill pack / workflow harness distilled from
    your real daily use) as the distribution engine — GitHub/HN/Reddit discovery still works
-   in 2026 while SEO does not.
+   in 2026, while zero-authority SEO no longer fits this hours budget (organic CTR
+   down 15–46% and falling — degraded badly, though not to zero).
 2. **A weekly niche newsletter** ("real builds with agentic coding" — teardowns, real
    numbers, working repos; no hype) on Substack as the compounding audience asset.
 3. **A paid bridge** — the Track B product line, later joined by a $5/mo paid tier at
@@ -146,7 +178,9 @@ first essay. A narrow micro-SaaS pivot on this scaffold becomes rational only ar
 month 9–12, *if* the audience surfaces a specific repeated pain — never the generic
 app-builder idea.
 
-**The math to $200/mo** (median case at month 6–9): 1,500–2,500 free subs → 15–25 paid
+**The math when the track is working** (month 6–9 for the survivors — NOT the median
+outcome; most new newsletters stall well under 1,000 subs and far below $200/mo, which
+is why this track is third and entered only once revenue exists): 1,500–2,500 free subs → 15–25 paid
 subs (~$65–105) + 4–8 product sales (~$100–200) + one sponsor slot (~$50–100). First
 dollar in 6–10 weeks if a launch post lands; month 3–4 if launches whiff (they're
 lottery-like — plan for it). Treat $200 here as a trailing-3-month average; the mix is
@@ -161,7 +195,8 @@ with AI agents," not one tool's changelog).
 
 **Excluded from this track on evidence**: SEO-affiliate content sites (AI Overviews have
 cut organic CTR 15–46%; established publishers report 27–80% traffic declines — a
-no-authority newcomer in 2026 is planting in salted earth) and YouTube (competent video
+no-authority newcomer can't reach viability at this hours budget, though established
+sites still earn) and YouTube (competent video
 has 3–5 hrs of irreducible human time per video; doesn't fit the hours budget).
 
 **Ceiling**: $2–4k/mo solo (5k engaged subs ≈ $500–1,500/mo; a $79–99 second product;
@@ -205,7 +240,8 @@ around it:
 - The "scale to $10k/month" section is longer than the "earn the first $50" section.
 - AI use undisclosed where a platform requires disclosure (Etsy, KDP) — one automated
   flag from deletion.
-- More than one platform, offer, or channel active in the first 90 days.
+- More than one platform, offer, or channel active in the first 90 days (passive
+  listings that need no ongoing effort excepted).
 - Progress measured in artifacts produced instead of proposals sent, replies received,
   conversations held.
 - Assumes week-5 motivation equals week-0 motivation, with no minimum quota that survives
@@ -223,7 +259,9 @@ around it:
   disclosure with account suspension for violations; Etsy runs automated detection;
   Gumroad's median new product sells zero. The volume play is dead by policy and was
   already dead by economics.
-- **SEO-affiliate content farms** — structurally broken post-AI-search, not just hard.
+- **SEO-affiliate content farms** — organic CTR down 15–46% post-AI-search and Google's
+  scaled-content enforcement deindexes programmatic AI sites; not viable for a
+  zero-authority newcomer at this hours budget.
 - **MLM / dropshipping arbitrage / "passive income" courses** — the seller of the system
   is the only one making money.
 - **Anything requiring credentials you lack** (legal/medical/tax advice) or academic
@@ -258,4 +296,7 @@ Re-verify at signup; platforms change terms often.
 - **Google AI Overviews**: organic CTR down 15–46% across studies (Ahrefs: −34.5% at
   position 1) — the reason SEO-content plays are excluded.
 - **Taxes (US)**: all of it is ordinary self-employment income (~15.3% SE tax before
-  income tax); report regardless of 1099-K thresholds; set aside 25–30% of net.
+  income tax); report regardless of 1099-K thresholds; set aside 25–30% of net. These
+  are US rules of thumb, not tax advice — once real revenue starts, confirm specifics
+  (entity choice, quarterly estimated payments, deductions including the Claude
+  subscription, your jurisdiction) with a tax professional.

@@ -10,11 +10,13 @@ for a product or service — through payment accounts only you can own, on platf
 rules only you can accept, for work you're willing to put your name on. Anyone selling you
 a fully-autonomous-money-agent is selling you the shovel, not the gold.
 
-What AI *can* do — and what this engine does — is collapse the labor cost of a small
-digital business by ~90%. Your Claude Max subscription is the key economic asset here:
+What AI *can* do — and what this engine does — is make your few weekly hours count for
+three to five: agents carry production while you keep only the judgment, approval, and
+relationship work. Your Claude Max subscription is the key economic asset here:
 **agent labor run inside Claude Code sessions has zero marginal cost to you.** Production
-(building products, drafting deliverables, writing listings, doing research) is effectively
-free and unlimited. That flips the traditional solo-business equation: your scarce
+(building products, drafting deliverables, writing listings, doing research) is
+effectively free within Max usage limits. That flips the traditional solo-business
+equation: your scarce
 resources are no longer production hours — they are **distribution, trust, and your 3–6
 human hours a week.** Everything in this system is designed around that inversion.
 
@@ -42,12 +44,20 @@ The workspace:
 VENTURE/
   README.md      ← you are here
   PLAYBOOK.md    ← the three income tracks, with real math and timelines
+  PROMPT.md      ← the improved version of the original prompt, reusable with any AI
   STATE.md       ← current scoreboard + next 3 actions (updated by /weekly-review)
   ledger.csv     ← every dollar in and out, net of fees
   research/      ← offer specs from /market-scout
   products/      ← built products awaiting/after launch
-  clients/       ← service packages and client deliverables
+  clients/       ← service packages + client work — CONTENTS ARE GIT-IGNORED (see below)
+  assets/        ← shared images, logos, thumbnails
 ```
+
+**Client-data warning**: this repository syncs to a hosted remote (GitHub, and Lovable
+auto-commits to it). Client briefs, datasets, code, and security findings therefore live
+only in `VENTURE/clients/`, whose contents are git-ignored — never commit them, never
+weaken that ignore rule, and use anonymized client slugs in the ledger and state files.
+The `gig-machine` skill enforces this and purges client data after each delivery.
 
 The loop is: **scout → build → list → distribute → weekly-review → kill or scale.**
 The playbook (`PLAYBOOK.md`) explains the three tracks and the sequencing rule the
@@ -72,8 +82,10 @@ The engine is installed and idle until these human-only steps happen:
   and payout bank.
 - [ ] **Commit to a weekly review slot** — same day every week, 30 minutes, run
   `/weekly-review`. Consistency is the actual engine; everything else is parts.
-- [ ] **Taxes**: this is real self-employment income. Set aside ~25–30% of net and track
-  everything in `ledger.csv` (the skills maintain it, you sanity-check it).
+- [ ] **Taxes (US rule of thumb)**: this is real self-employment income. Set aside
+  ~25–30% of net, track everything in `ledger.csv` (the skills maintain it, you
+  sanity-check it), and once real revenue starts, confirm specifics — quarterly
+  estimated payments, deductions, your jurisdiction — with a tax professional.
 
 ## Guardrails (the engine will refuse these, and so should you)
 
@@ -89,6 +101,9 @@ The engine is installed and idle until these human-only steps happen:
   durable assets; agents draft, you own.
 - **No credential sharing**: Claude drafts listings and messages; you paste and publish.
   Payment accounts, marketplace logins, and client relationships stay in your hands.
+- **Client confidentiality is absolute**: client material never enters a tracked file or
+  leaves this machine, AI use is disclosed up front in proposals (and jobs that prohibit
+  AI are skipped), and client data is purged after each delivery.
 
 ## Scaling past $200
 
@@ -96,14 +111,16 @@ $200/mo is the break-even bar, not the design ceiling. The scale path (detail in
 `PLAYBOOK.md`): services scale by reviews → higher prices → retainers (~$1.5–2.5k/mo
 ceiling at 6 hrs/wk); products scale by finding one winner and building a product line
 around it (asymmetric upside, $1–3k/mo realistic at 12–18 months if a winner emerges);
-compounding assets (newsletter, SEO tools, micro-SaaS) stack on top once cash flow exists.
-When trailing-30-day net crosses $200, `/weekly-review` automatically raises the target
-to $500 and adds a compounding-track experiment.
+compounding assets (newsletter, OSS tools, micro-SaaS) stack on top once cash flow exists.
+When trailing-30-day net revenue (excluding the subscription overhead line) crosses $200,
+`/weekly-review` raises the target to $500 and adds a compounding-track experiment.
 
 ## Getting started right now
 
 1. Complete the Week-0 checklist above.
 2. Open a Claude Code session in this repo and run:
    `/market-scout` — paste your unfair-advantage list and ask it to evaluate 3 candidate offers.
-3. Build the winner (`/gig-machine` or `/product-factory`), list it (`/listing-writer`),
-   publish it (you), and run `/weekly-review` in seven days.
+3. Build the winner with `/gig-machine` — its package sheets double as your service
+   listings, so no separate listing pass is needed. (`/product-factory` +
+   `/listing-writer` come later, once the Track B entry condition in `PLAYBOOK.md` is
+   met.) Publish (you), then run `/weekly-review` in seven days.

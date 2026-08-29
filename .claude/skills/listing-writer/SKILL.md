@@ -11,22 +11,28 @@ thumbnail + first two lines; the rest of the page exists to close the ones who c
 ## Inputs
 
 - A finished product (`VENTURE/products/<slug>/`) or package sheet (`VENTURE/clients/_packages.md`).
+  Note: for services, `/gig-machine` Mode 1 already produces the listing drafts — this
+  skill is the optional polish pass on those, not a required second step.
 - Target platform. If not given, ask — copy that works on Gumroad (direct, benefit-led,
   long-form ok) fails on Etsy (search-driven, tag-critical, 140-char titles) and vice versa.
 - The offer spec's buyer/pain/moat — reuse its language; buyers respond to their own words.
 
 ## Output
 
-`listing-<platform>.md` inside the product/client folder:
+`listing-<platform>.md` inside the product folder (for services:
+`VENTURE/clients/listing-<platform>.md`):
 
 1. **Title** — 3 candidates: the search terms a buyer actually types + the concrete outcome.
    No hype adjectives ("ultimate", "insane"), no emoji walls.
 2. **Hook** — the first 1–2 sentences shown before "read more". Pain → outcome, specific.
 3. **Body** — what's in the box (bullet the actual files/deliverables), who it's for, who
    it's NOT for (a real anti-pitch builds trust and cuts refunds), how delivery works.
-4. **Social proof plan** — honest options for a newcomer: launch price for first N buyers
-   in exchange for feedback, sample/preview file, money-back guarantee. NEVER fabricated
-   testimonials, sales counts, or reviews.
+4. **Social proof plan** — honest options for a newcomer: an unconditional launch price
+   for the first N buyers (offered to everyone, contingent on nothing), a sample/preview
+   file, a money-back guarantee; separately, a no-strings request for an honest review.
+   NEVER condition anything of value on a review or its sentiment (FTC review rules and
+   every marketplace's manipulation policy), and NEVER fabricated testimonials, sales
+   counts, or reviews.
 5. **Tags/keywords** — platform-appropriate count, drawn from real search phrases (verify
    with WebSearch against the platform if available).
 6. **Price presentation** — the price from the spec, plus anchor framing (what the

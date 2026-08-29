@@ -16,8 +16,13 @@ face the numbers, decide, and leave exactly three actions on the table.
 2. **Ask the operator** what happened this week that isn't in the files: sales, client
    replies, listings published, hours actually spent. Append any new revenue/costs to
    `VENTURE/ledger.csv` (columns: `date,track,item,gross_usd,fees_usd,net_usd,notes`).
-3. **Compute honestly**:
-   - Net revenue this week / this month; trailing-30-day run-rate vs. the $200/mo target.
+   On the first review of each calendar month, append the Claude Max subscription row
+   (`track=overhead`, net −$200) — check it isn't already logged for this month first.
+3. **Compute honestly** (conventions: "net revenue" = sum of `net_usd` excluding
+   `track=overhead` rows — after platform fees and refunds, before taxes; overhead is
+   reported on its own scoreboard line, never mixed into the revenue metric):
+   - Net revenue this week / this month; trailing-30-day run-rate vs. the $200/mo target;
+     net after overhead as its own line.
    - Hours spent → effective $/hour (face this number; it should trend up monthly).
    - Pipeline: products live vs. drafted-but-unlaunched (drafted-but-unlaunched is the
      classic failure state — flag it loudly), proposals sent, replies, conversion.
@@ -25,20 +30,29 @@ face the numbers, decide, and leave exactly three actions on the table.
    - **Leading indicators first**: before month 3, judge weeks by inputs, not revenue —
      the weekly quota floor is 5 tailored proposals OR 3 substantive community
      contributions (agent-prepped, ≤90 human minutes). Revenue lags; quota-kept weeks lead.
+     A community contribution counts toward the quota only if the community permits
+     AI-assisted content, the operator substantially rewrote and owns every word, and it
+     would be worth posting with zero promotional payoff — quota pressure is never a
+     reason to post AI-drafted filler under a human byline.
    - **Week-4 diagnostic**: count conversations with humans who could pay. Zero means
      the venture is currently a hobby — say so plainly and make action #1 a conversation,
      not a build.
    - **Kill**: a product with 0 sales after 4 weeks live *with real distribution effort*
      gets one repositioning (new listing/price/audience via `/listing-writer`), then killed.
-     A niche with 10+ proposals and 0 replies gets its offer redesigned, not more proposals.
+     For services: the playbook expects the first contract only after 15–30 tailored
+     proposals, so early silence is normal, not a signal — redesign the offer (not the
+     cadence) only at 20+ proposals with zero replies AND zero profile views/interviews;
+     replies without contracts mean the offer works and the close needs fixing.
    - **Scale**: anything that sold twice gets doubled down — a v2, a companion product,
      a raised price, or more distribution. Revenue concentration beats portfolio spray.
    - **Unblock**: if the bottleneck is a human step (account not created, product not
      uploaded), next week's action #1 is that step, timeboxed to 30 minutes.
-   - **Ramp check**: if trailing-30-day net ≥ $200, the target moves to $500 and one
-     compounding-track experiment (see `VENTURE/PLAYBOOK.md` track C) gets added.
+   - **Ramp check**: if trailing-30-day net *revenue* (excluding overhead) ≥ $200, the
+     target moves to $500 and one compounding-track experiment (see `VENTURE/PLAYBOOK.md`
+     track C) gets added.
 5. **Write back** `VENTURE/STATE.md`:
-   - Scoreboard (this month net, run-rate, streak of weeks reviewed).
+   - Scoreboard (trailing-30-day net revenue, overhead, net after overhead, hours this
+     week and effective $/hour, streak of weeks reviewed).
    - What's live, what's in progress, what was killed and why (so dead niches stay dead).
    - **Next 3 actions** — each with its skill command (e.g. "run `/product-factory` on X",
      "upload Y — human step, 30 min") and the single metric it should move.
