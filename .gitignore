@@ -29,3 +29,8 @@ VENTURE/clients/*
 !VENTURE/clients/README.md
 # _packages.md is the operator's own service-package definitions — no client data.
 !VENTURE/clients/_packages.md
+
+# Portfolio case-study bulk data (public dataset, ~20MB) stays out of git; a
+# 500-row sample is committed and CASE_STUDY.md documents full regeneration.
+VENTURE/portfolio/data-cleanup-case-study/raw_food_inspections.csv
+VENTURE/portfolio/data-cleanup-case-study/cleaned.csv

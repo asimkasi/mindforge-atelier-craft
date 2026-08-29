@@ -4,6 +4,7 @@ import PhaseReview from "./PhaseReview";
 import { useState, useEffect } from "react";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import type { Tables } from "@/integrations/supabase/types";
 
 // Phases
 const phases = [
@@ -62,7 +63,7 @@ const AgentWorkflow = () => {
   const [outputs, setOutputs] = useState<Record<string, Output>>(defaultOutputs);
   const [loading, setLoading] = useState(false);
   const [llm, setLLM] = useState(LLM_OPTIONS[0].key); // default OpenAI
-  const [logs, setLogs] = useState<any[]>([]);
+  const [logs, setLogs] = useState<Tables<"project_logs">[]>([]);
 
   useEffect(() => {
     // Fetch recent logs from project_logs

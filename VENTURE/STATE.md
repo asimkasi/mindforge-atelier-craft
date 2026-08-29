@@ -1,6 +1,7 @@
 # Venture state
 
-_Updated by `/weekly-review`. Last update: 2026-08-29 (week 0 — engine installed, nothing live yet)._
+_Updated by `/weekly-review`. Last update: 2026-08-29 (week 0, second pass — launch kit
+and portfolio built; waiting on the operator's day-1 human steps)._
 
 ## Scoreboard
 
@@ -22,22 +23,40 @@ visible without making the revenue target ambiguous.
 
 ## Live
 
-Nothing yet. That's expected at week 0.
+Nothing yet — nothing can be listed until the operator creates the Upwork account.
+
+## The chosen offer (Track A, one offer / one channel / 90 days)
+
+**Lovable/Supabase fix packages** — picked from live marketplace evidence on 2026-08-29
+(urgent exact-fit Upwork job stream, $30–$1,000 price anchors, weak keyword-spam
+competition, strongest operator fit). Tiers in `VENTURE/clients/_packages.md`:
+Single Fix $75 (intro $50) · Fix Pack $150 (intro $95) · Production Gate $250 (intro $150).
 
 ## In progress
 
-- Engine installed (skills + playbook). Waiting on operator setup steps — see
-  "What only you can do" in `VENTURE/README.md`.
+- ✅ Engine installed (skills + playbook), merged to main.
+- ✅ Launch kit built: `VENTURE/launch/` (Upwork profile copy, Fiverr gig, proposal
+  playbook, day-1 checklist) + `VENTURE/clients/_packages.md`.
+- ✅ Portfolio built: `VENTURE/portfolio/` — data-cleanup case study (real Chicago
+  public dataset, runnable pipeline), full docs package for this repo, and a real
+  bug-fix case study (the app's edge-function call, fixed and build-verified).
+- ✅ Weekly review automated: fires every Saturday 14:00 UTC into the operator's session.
+- ⏳ **Blocked on the operator**: `VENTURE/launch/day-1-checklist.md` (<60 min).
 
 ## Killed (stays dead — don't re-scout without new evidence)
 
-_None yet._
+- **data-cleanup as the OPENING offer** — most commoditized of the three candidates,
+  $5–50 Fiverr anchors with data-entry price gravity (kept as a portfolio proof and a
+  possible later second offer, not the lead).
+- **codebase-docs as the OPENING offer** — weakest live-demand signal; no stream of
+  small fixed-scope "document my repo" jobs to bid on.
 
 ## Next 3 actions
 
-1. Read `VENTURE/README.md` and complete the Week-0 checklist (Upwork account day 1 +
-   unfair-advantage inventory) — human step, ~45 min.
-2. Run `/market-scout` with your unfair-advantage list to pick ONE service offer
-   (playbook Track A; one offer, one channel for 90 days).
-3. Run `/gig-machine` on the winning spec to build packages + portfolio artifacts —
-   then `/weekly-review` in seven days, same day every week.
+1. **Operator**: complete `VENTURE/launch/day-1-checklist.md` — Upwork account, ID
+   verification, paste the profile from `VENTURE/launch/upwork-profile.md`, ~$15 of
+   Connects. Under 60 minutes. Nothing else can move until this.
+2. Tell Claude "day 1 done" → Claude preps the first 5 tailored proposals from live job
+   posts per `VENTURE/launch/proposal-playbook.md` (operator personalizes and submits).
+3. Optionally publish the passive Fiverr gig from `VENTURE/launch/fiverr-gigs.md`.
+   The automated `/weekly-review` runs Saturday and reports the scoreboard either way.
