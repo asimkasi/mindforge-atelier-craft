@@ -1,5 +1,9 @@
 # Welcome to your Lovable project
 
+> **💰 Looking for the income engine?** This repo now also contains a complete,
+> honest system for building AI-leveraged income with Claude Code — agent skills,
+> playbook, and weekly operating loop. **Start at [`VENTURE/README.md`](VENTURE/README.md).**
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/245f8dcd-92fb-4932-8139-3ad9602a6544

@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Client confidential data must NEVER be committed: this repo syncs to a hosted
+# remote (GitHub + Lovable auto-commits). Only the directory README is tracked.
+VENTURE/clients/*
+!VENTURE/clients/README.md
+# _packages.md is the operator's own service-package definitions — no client data.
+!VENTURE/clients/_packages.md
