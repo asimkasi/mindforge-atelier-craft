@@ -1,7 +1,8 @@
 # Venture state
 
-_Updated by `/weekly-review`. Last update: 2026-08-29 (week 0, second pass — launch kit
-and portfolio built; waiting on the operator's day-1 human steps)._
+_Updated by `/weekly-review`. Last update: 2026-08-29, 14:00 UTC (review #1 — first
+automated weekly review; engine and launch kit complete, no operator activity reported
+yet, so revenue work is blocked on the day-1 human steps)._
 
 ## Scoreboard
 
@@ -16,8 +17,8 @@ visible without making the revenue target ambiguous.
 | Trailing-30-day overhead | −$200 (Claude Max) |
 | Net after overhead | −$200 |
 | Target | $200/mo net revenue |
-| Hours this week / effective $-per-hour | 0 / n.a. |
-| Weeks reviewed in a row | 0 |
+| Hours this week / effective $-per-hour | 0 reported / n.a. |
+| Weeks reviewed in a row | 1 |
 | Products live | 0 |
 | Service packages listed | 0 |
 
