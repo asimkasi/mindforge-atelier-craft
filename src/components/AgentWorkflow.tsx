@@ -2,6 +2,7 @@ import PhaseTimeline from "./PhaseTimeline";
 import IdeaInput from "./IdeaInput";
 import PhaseReview from "./PhaseReview";
 import { useState, useEffect } from "react";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
 // Phases
@@ -72,31 +73,49 @@ const AgentWorkflow = () => {
     fetchLogs();
   }, [currentPhase]);
 
-  // 1. Send request to edge function for each agent phase and store outputs/logs in Supabase
-  const handleGenerateOutput = async (phaseIdx: number, inputIdea: string, prevOutputs: Record<string, Output>) => {
-    const phase = phases[phaseIdx];
+  // 1. Send request to edge function for each agent phase and store outputs/logs in Supabase.
+  // `targetIdx` is the phase whose output we are generating — i.e. the phase the
+  // workflow is advancing INTO, so its review screen has content to show.
+  const handleGenerateOutput = async (targetIdx: number, inputIdea: string, prevOutputs: Record<string, Output>) => {
+    const phase = phases[targetIdx];
     setLoading(true);
     try {
       // Compose prompt for agent
       const prevOutputStr = Object.values(prevOutputs)
         .map(o => o.content)
         .join("\n");
-      const thisPrompt = phaseIdx === 0 ? inputIdea : prevOutputStr + "\n" + idea;
+      // First generated phase (concept draft) works from the raw idea;
+      // later phases build on the accumulated outputs.
+      const thisPrompt = targetIdx === 1 ? inputIdea : prevOutputStr + "\n" + idea;
 
-      // Real LLM call via edge function
-      const fnResp = await fetch("/functions/v1/generate-agent-output", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      // Real LLM call via the Supabase edge function. functions.invoke targets the
+      // project's functions URL and attaches the required auth headers — a relative
+      // fetch("/functions/v1/...") only works behind a local dev proxy and 404s on
+      // any static host.
+      const { data: fnData, error: fnError } = await supabase.functions.invoke("generate-agent-output", {
+        body: {
           prompt: thisPrompt,
           llm,
           system: SYSTEM_PROMPTS[phase.key],
-        }),
+        },
       });
-      const fnData = await fnResp.json();
 
-      if (!fnResp.ok || !fnData.content) {
-        throw new Error(fnData.error || "LLM error");
+      if (fnError) {
+        // On a non-2xx response the edge function's JSON error body is on
+        // error.context — surface its message instead of a generic one.
+        let message = fnError.message;
+        if (fnError instanceof FunctionsHttpError) {
+          try {
+            const details = await fnError.context.json();
+            if (details?.error) message = String(details.error);
+          } catch {
+            // Error body wasn't JSON — keep the generic message.
+          }
+        }
+        throw new Error(message);
+      }
+      if (!fnData?.content) {
+        throw new Error(fnData?.error || "LLM provider returned no content.");
       }
 
       // Save output locally for fast UI
@@ -107,8 +126,8 @@ const AgentWorkflow = () => {
       setOutputs((o) => ({ ...o, [phase.key]: thisOutput }));
 
       // 2. Write outputs & logs to Supabase for persistent memory
-      if (phaseIdx === 0) {
-        // Insert app idea and save ID
+      if (targetIdx === 1) {
+        // First generation: insert app idea (described by the concept draft) and save ID
         const { data, error } = await supabase
           .from("app_ideas")
           .insert({ title: inputIdea.trim(), description: fnData.content })
@@ -135,27 +154,24 @@ const AgentWorkflow = () => {
       const { data: logsData } = await supabase.from("project_logs").select("*").order("created_at", { ascending: false }).limit(10);
       if (logsData) setLogs(logsData);
 
-      setLoading(false);
       return thisOutput;
-    } catch (err: any) {
+    } finally {
       setLoading(false);
-      throw err;
     }
   };
 
-  // Advance phase and handle LLM calls/storage
+  // Advance phase and handle LLM calls/storage: generate the NEXT phase's output,
+  // then move to it — so every phase (including the final one) shows its content.
   const advancePhase = async () => {
     if (loading) return;
+    const nextIdx = currentPhase + 1;
+    if (nextIdx >= phases.length) return;
     try {
-      const phaseIdx = currentPhase;
-      const prevOutputs = outputs;
-
-      const genOut = await handleGenerateOutput(phaseIdx, idea, prevOutputs);
-
-      if (currentPhase < phases.length - 1) setCurrentPhase((p) => p + 1);
+      await handleGenerateOutput(nextIdx, idea, outputs);
+      setCurrentPhase(nextIdx);
     } catch (e) {
-      // Optionally notify error
-      alert("Error generating output: " + (e.message || e));
+      // Notify error; the workflow stays on the current phase so the user can retry.
+      alert("Error generating output: " + (e instanceof Error ? e.message : String(e)));
     }
   };
 
