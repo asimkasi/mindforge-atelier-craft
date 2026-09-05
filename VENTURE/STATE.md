@@ -1,8 +1,8 @@
 # Venture state
 
-_Updated by `/weekly-review`. Last update: 2026-08-29, 14:00 UTC (review #1 — first
-automated weekly review; engine and launch kit complete, no operator activity reported
-yet, so revenue work is blocked on the day-1 human steps)._
+_Updated by `/weekly-review`. Last update: 2026-09-05, 14:00 UTC (review #2 — one full
+week with no operator activity reported; everything remains blocked on the day-1 human
+steps. September overhead logged.)_
 
 ## Scoreboard
 
@@ -14,11 +14,11 @@ visible without making the revenue target ambiguous.
 | Metric | Value |
 |---|---|
 | Trailing-30-day net revenue | $0 |
-| Trailing-30-day overhead | −$200 (Claude Max) |
-| Net after overhead | −$200 |
+| Monthly overhead | −$200 (Claude Max; one row per month, not a trailing sum) |
+| Net after overhead (monthly) | −$200 |
 | Target | $200/mo net revenue |
 | Hours this week / effective $-per-hour | 0 reported / n.a. |
-| Weeks reviewed in a row | 1 |
+| Weeks reviewed in a row | 2 |
 | Products live | 0 |
 | Service packages listed | 0 |
 
@@ -54,10 +54,11 @@ Single Fix $75 (intro $50) · Fix Pack $150 (intro $95) · Production Gate $250 
 
 ## Next 3 actions
 
-1. **Operator**: complete `VENTURE/launch/day-1-checklist.md` — Upwork account, ID
-   verification, paste the profile from `VENTURE/launch/upwork-profile.md`, ~$15 of
-   Connects. Under 60 minutes. Nothing else can move until this.
-2. Tell Claude "day 1 done" → Claude preps the first 5 tailored proposals from live job
-   posts per `VENTURE/launch/proposal-playbook.md` (operator personalizes and submits).
+1. **Operator, smallest possible step (~15 min)**: create the Upwork account and start
+   ID verification — just that; verification takes days to clear, so starting it is the
+   whole point. Profile paste and Connects can be a separate 20-minute session later.
+2. Tell Claude "account created" → Claude walks the rest of
+   `VENTURE/launch/day-1-checklist.md` with you, then preps the first 5 tailored
+   proposals from live job posts (you personalize and submit).
 3. Optionally publish the passive Fiverr gig from `VENTURE/launch/fiverr-gigs.md`.
    The automated `/weekly-review` runs Saturday and reports the scoreboard either way.
