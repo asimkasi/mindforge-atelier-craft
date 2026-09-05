@@ -1,2 +1,3 @@
 date,track,item,gross_usd,fees_usd,net_usd,notes
 2026-08-29,overhead,Claude Max subscription (monthly),0,200.00,-200.00,"The number this engine exists to beat. /weekly-review re-logs it on the first review of each month. track=overhead rows are excluded from the scoreboard's net-revenue metric and reported separately."
+2026-09-05,overhead,Claude Max subscription (monthly),0,200.00,-200.00,"September. Overhead is reported as a monthly figure on the scoreboard (one row per month), not summed over a trailing window."

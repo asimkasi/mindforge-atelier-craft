@@ -50,6 +50,8 @@ VENTURE/
   research/      ← offer specs from /market-scout
   products/      ← built products awaiting/after launch
   clients/       ← service packages + client work — CONTENTS ARE GIT-IGNORED (see below)
+  launch/        ← the Upwork/Fiverr launch kit: profile copy, gig, proposal playbook, day-1 checklist
+  portfolio/     ← the three sample artifacts that make a zero-review profile credible
   assets/        ← shared images, logos, thumbnails
 ```
 
